@@ -32,7 +32,8 @@ export default function Numbers() {
              <button onClick={() => router.push(`/us/${number.number}`)}>Number {number.number}
               </button>
             </li>
-          ))
+          )
+          )
         ) : (
           <p>No available numbers.</p>
         )}
