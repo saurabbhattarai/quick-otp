@@ -11,6 +11,16 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      container: {
+        center: true, // Centers the container
+        padding: {
+          DEFAULT: "1rem", // Default padding for all screen sizes
+          sm: "2rem",      // Padding for small screens
+          lg: "4rem",      // Padding for large screens
+          xl: "6rem",      // Padding for extra-large screens
+          "2xl": "8rem",   // Padding for 2x extra-large screens
+        },
+      },
     },
   },
   plugins: [],
