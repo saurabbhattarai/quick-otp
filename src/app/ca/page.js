@@ -29,7 +29,7 @@ export default function Numbers() {
         {numbers.length > 0 ? (
           numbers.map((number, index) => (
             <li key={index}> 
-             <button onClick={() => router.push(`/us/${number.number}`)}>Number {number.number}
+             <button onClick={() => router.push(`/ca/${number.number}`)}>Number {number.number}
               </button>
             </li>
           )
