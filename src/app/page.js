@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
+import Card from "./components/Card/Card";
+
 
 export default function Home() { 
   const router = useRouter();
@@ -25,14 +27,16 @@ export default function Home() {
   const navigateToCanada = () => {
     router.push('/ca');
   }
+  const flag = 123;
 
   return (
     <>
     {/* Sticky Header */}
     <div className="sticky top-0 z-50 rounded-lg p-4">
-      <Header />
+      {/* <Header /> */}
     </div> 
     <Hero />
+    <Card flag={flag} country={countries}/>
     {/* Content Below the Header */}
     <div className="mt-8 py-12">
       {countries.map((country, index) => {
