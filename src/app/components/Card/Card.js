@@ -1,18 +1,21 @@
-"use client"
-//pass the props
-//country name and flag and numbers
-export default function Card({flag,countries,numbers=" "}) {
-    return (
-        <>
-          <div className="bg-gradient-to-r from-green-200 to-yellow-200 shadow-lg rounded-2xl p-6 w-full md:w-80 flex flex-col items-center text-center">
-            <div className="text-4xl mb-4">{flag}</div>
-            <h2 className="text-xl font-semibold text-gray-800">{countries}</h2>
-            <p className="mt-2 text-lg font-bold text-green-700">Total Numbers: {numbers}</p>
-            </div>
-        </>
-        );
+// components/Card/Card.js
+import React from "react";
+
+const Card = ({ flag, countries, numbers, onClick }) => {
+  return (
+    <div
+      className="border p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-50"
+      onClick={onClick}  // Attach the onClick handler
+    >
+      <div className="flex items-center">
+        <div className="mr-4">{flag}</div>
+        <div>
+          <h3 className="text-lg font-bold">{countries}</h3>
+          <p className="text-gray-600">{numbers}</p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-
-
-
+export default Card;

@@ -1,81 +1,80 @@
 "use client";
 
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Card from "./components/Card/Card";
 
-
-export default function Home() { 
+export default function Home() {
   const router = useRouter();
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
     async function getCountries() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/countries`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/countries`, {
+        cache: 'force-cache', // Cache the response
+      });
       const data = await response.json();
       setCountries(data.data.data);
     }
     getCountries();
-  }, []); 
+  }, []);
 
   const navigateToUS = () => {
     router.push('/us');
-  } 
+  };
 
   const navigateToCanada = () => {
     router.push('/ca');
-  }
-  const flag = 123;
+  };
+
+  // Mapping country codes to flag images
+  const getFlag = (countryCode) => {
+    switch (countryCode) {
+      case 'US':
+        return 'https://flagcdn.com/w40/us.png';  // US flag emoji
+      case 'CA':
+        return 'https://flagcdn.com/w40/ca.png';  // Canada flag emoji
+      // Add more country codes and their emojis here
+      default:
+        return 'https://flagcdn.com/w40/us.png';  // Default flag (white flag emoji) for unknown country code
+    }
+  };
+
+  // Handle card click based on country code
+  const handleCardClick = (countryCode) => {
+    if (countryCode === 'US') {
+      navigateToUS();
+    } else if (countryCode === 'CA') {
+      navigateToCanada();
+    }
+    // Add more conditions for other countries if needed
+  };
 
   return (
     <>
-    {/* Sticky Header */}
-    <div className="sticky top-0 z-50 rounded-lg p-4">
-      {/* <Header /> */}
-    </div> 
-    <Hero />
-    <Card flag={flag} country={countries}/>
-    {/* Content Below the Header */}
-    <div className="mt-8 py-12">
-      {countries.map((country, index) => {
-        if (country.country_code === "US") {
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-50 rounded-lg p-4">
+        {/* <Header /> */}
+      </div>
+      <Hero />
+
+      <div className="mt-8 py-12">
+        {countries.map((country, index) => {
+          const flagImage = getFlag(country.country_code);
+
           return (
-            <button
-              onClick={navigateToUS}
-              className="p-4 bg-green-100 hover:bg-green-200 transition-colors cursor-pointer w-full mb-2"
+            <Card
               key={index}
-            >
-              <div>
-                <p>Country: United States</p>
-                {/* <p>Total Number: {country.total_count}</p> */}
-              </div>
-            </button>
+              flag={<img src={flagImage} alt={`${country.country_code} flag`} className="w-16 h-16" />}  // Passing the flag as an image
+              countries={country.country_name}  // Passing the country name
+              numbers={country.total_count}  // Passing the total count (or any relevant number)
+              onClick={() => handleCardClick(country.country_code)}  // Pass the onClick handler
+            />
           );
-        } else if (country.country_code === "CA") {
-          return (
-            <button
-              onClick={navigateToCanada}
-              className="p-4 bg-green-100 hover:bg-green-200 transition-colors cursor-pointer w-full mb-2"
-              key={index}
-            >
-              <div>
-                <p>Country: Canada</p>
-                {/* <p>Total Number: {country.total_count}</p> */}
-              </div>
-            </button>
-          );
-        } else {
-          return (
-            <div className="p-4 bg-gray-100 mb-2 w-full" key={index}>
-              <p>Country: {country.country_code}</p>
-              {/* <p>Total Number: {country.total_count}</p> */}
-            </div>
-          );
-        }
-      })}
-    </div>
-  </>  
+        })}
+      </div>
+    </>
   );
 }
