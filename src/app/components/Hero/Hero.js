@@ -65,14 +65,14 @@ export default function Hero() {
                   Secure, instant, and hassle-free OTP delivery. Input the provided phone numbers to websites and receive OTPs directly through our platform. Enhance your authentication process with ease.
                 </p>
 
-                <div className="mt-10">
+                {/* <div className="mt-10">
                   <a
                     href="#"
                     className="inline-flex items-center justify-center w-full px-8 py-4 text-lg font-semibold text-white bg-green-600 rounded-full sm:w-auto hover:bg-green-700 transition-all duration-200"
                   >
                     Start Exploring
                   </a>
-                </div>
+                </div> */}
               </div>
 
               {/* Right Column - Visual Content */}
