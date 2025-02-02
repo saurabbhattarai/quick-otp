@@ -36,12 +36,11 @@ export default function Home() {
   const getFlag = (countryCode) => {
     switch (countryCode) {
       case "US":
-        return "https://flagcdn.com/w40/us.png"; // US flag emoji
+        return "https://api.iconify.design/circle-flags:us.svg"; // High-quality US flag
       case "CA":
-        return "https://flagcdn.com/w40/ca.png"; // Canada flag emoji
-      // Add more country codes and their emojis here
+        return "https://api.iconify.design/circle-flags:ca.svg"; // High-quality Canada flag
       default:
-        return "https://flagcdn.com/w40/us.png"; // Default flag (white flag emoji) for unknown country code
+        return "https://api.iconify.design/circle-flags:un.svg"; // Default UN flag
     }
   };
 
@@ -57,39 +56,45 @@ export default function Home() {
 
   return (
     <>
-      {/* Sticky Header */}
-      <div className="sticky top-0 z-50 rounded-lg p-4">{/* <Header /> */}</div>
-      <Hero />
-      <div className="text-center font-bold text-2xl bg-green-50">
-        Available Countries
-      </div>
-      <div className="flex flex-wrap gap-4 justify-center bg-green-50 py-12">
-        {countries.map((country, index) => {
-          const flagImage = getFlag(country.country_code);
-          const country_name =
-            country.country_code === "US"
-              ? "United States"
-              : country.country_code === "CA"
-              ? "Canada"
-              : country.country_code; // Fallback to country code if not US or CA
+      <div className="bg-green-50">
+        {/* Sticky Header */}
+        <div className="sticky top-0 z-50 rounded-lg p-4">
+          {/* <Header /> */}
+        </div>
+        <Hero /> {/* Hero Section */}
+        <div className = "border-t-2 container py-12">
+          <div className="flex items-center justify-center py-2">
+            <span className="font-bold text-2xl text-center">
+              Available Countries
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-4 justify-center bg-green-50 py-4">
+            {countries.map((country, index) => {
+              const flagImage = getFlag(country.country_code);
+              const country_name =
+                country.country_code === "US"
+                  ? "United States"
+                  : country.country_code === "CA"
+                  ? "Canada"
+                  : country.country_code; // Fallback to country code if not US or CA
 
-          return (
-            <>
-              <Card
-                key={index}
-                flag={
-                  <img
-                    src={flagImage}
-                    alt={`${country.country_code} flag`}
-                    className="w-12 h-12"
-                  />
-                }
-                countries={country_name}
-                onClick={() => handleCardClick(country.country_code)}
-              />
-            </>
-          );
-        })}
+              return (
+                <Card
+                  key={index}
+                  flag={
+                    <img
+                      src={flagImage}
+                      alt={`${country.country_code} flag`}
+                      className="w-12 h-12"
+                    />
+                  }
+                  countries={country_name}
+                  onClick={() => handleCardClick(country.country_code)}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </>
   );
