@@ -15,9 +15,9 @@ export default function Header() {
           {/* Navigation Links - Centered */}
           <div className="hidden lg:flex items-center justify-between gap-x-10">
             <a href="/" className="text-lg font-semibold text-green-800 hover:text-green-700">Home</a>
-            <a href="#" className="text-lg font-semibold text-green-800 hover:text-green-700">About</a>
+            <a href="/about-us" className="text-lg font-semibold text-green-800 hover:text-green-700">About</a>
             <a href="#" className="text-lg font-semibold text-green-800 hover:text-green-700">Blogs</a>
-            <a href="#" className="text-lg font-semibold text-green-800 hover:text-green-700">Contact</a>
+            <a href="/contact-us" className="text-lg font-semibold text-green-800 hover:text-green-700">Contact</a>
           </div>
 
           {/* Mobile Menu Button (Hidden for now) */}
